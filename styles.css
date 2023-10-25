@@ -1,3 +1,128 @@
+*, *::after, *::before{
+    box-sizing: border-box;
+}
+
+body{
+    margin:0;
+    background-color:rgb(148, 148, 148);
+}
+
 h1{
-    color:red;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    color:rgb(22, 109, 22);
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+#controls{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info{
+    color:rgb(22, 109, 22);
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#start-game{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#X-button,
+#O-button,
+#start-button,
+#reset-button{
+    width:100px;
+    height:50px;
+    background-color: rgb(196, 245, 196);
+    border: 2px solid rgb(22, 109, 22);
+    border-radius: 3px;
+    color:rgb(22, 109, 22);
+    font-size: 20px;
+    font-weight: bold;
+    cursor:pointer;
+    margin: 10px;
+}
+
+#start-button{
+    width:160px;
+}
+
+#X-button:hover,
+#O-button:hover,
+#start-button:hover,
+#reset-button:hover{
+    background-color: beige;
+}
+
+#gameboard{
+   width: 100vw;
+   height:100vh;
+   display: grid;
+   justify-content: center;
+   align-content: start;
+   grid-template-columns: repeat(3, auto);
+   padding:10px;
+}
+
+.cell{
+    width:100px;
+    height:100px;
+    border:2px solid rgb(22, 109, 22, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3){
+    border-top:none;
+}
+
+.cell:nth-child(3n+1){
+    border-left: none;
+}
+
+.cell:nth-child(3n+3){
+    border-right: none;
+}
+
+.cell:last-child,
+.cell:nth-child(8),
+.cell:nth-child(7){
+    border-bottom:none;
+}
+
+
+#game-over{
+    display:none;
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color: rgb(22, 109, 22, 0.6);
+    justify-content: center;
+    align-items: center;
+    color: beige;
+    font-size: 3rem;
+    font-weight: bold;
+    flex-direction: column;
+}
+
+#game-over.show{
+    display: flex;
 }
