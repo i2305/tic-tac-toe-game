@@ -2,6 +2,7 @@
     box-sizing: border-box;
 }
 
+
 body{
     margin:0;
     background-color:rgb(148, 148, 148);
@@ -84,6 +85,7 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .cell:first-child,
@@ -106,6 +108,41 @@ h1{
     border-bottom:none;
 }
 
+.x::before,
+.x::after{
+    content:"";
+    position: absolute;
+    width:20px;
+    height:80px;
+    background-color: rgb(196, 245, 196);
+}
+
+.x::before{
+    transform:rotate(45deg)
+}
+
+.x::after{
+    transform:rotate(-45deg)
+}
+
+.circle::before,
+.circle::after{
+    content:"";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.circle::before{
+    width:80px;
+    height:80px;
+    background-color:rgb(22, 109, 22);
+}
+
+.circle::after{
+    width:60px;
+    height:60px;
+    background-color:rgb(196, 245, 196);
+}
 
 #game-over{
     display:none;
