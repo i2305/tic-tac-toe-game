@@ -1,5 +1,6 @@
 *, *::after, *::before{
     box-sizing: border-box;
+    font-family:'Courier New', Courier, monospace;
 }
 
 
@@ -8,22 +9,24 @@ body{
     background-color:rgb(148, 148, 148);
 }
 
+.header{
+    width:100vw;
+    height:20vh;
+    background-color: rgb(22, 109, 22);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 h1{
     display:flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
     padding: 5px;
-    color:rgb(22, 109, 22);
+    color:rgb(196, 245, 196);
     font-weight: bold;
     font-size: 3rem;
-}
-
-#controls{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
 }
 
 .info{
@@ -39,10 +42,9 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 30px;
 }
 
-#X-button,
-#O-button,
 #start-button,
 #reset-button{
     width:100px;
@@ -61,8 +63,6 @@ h1{
     width:160px;
 }
 
-#X-button:hover,
-#O-button:hover,
 #start-button:hover,
 #reset-button:hover{
     background-color: beige;
@@ -75,8 +75,8 @@ h1{
    justify-content: center;
    align-content: start;
    grid-template-columns: repeat(3, auto);
-   padding:10px;
 }
+
 
 .cell{
     width:100px;
@@ -139,8 +139,8 @@ h1{
 }
 
 .circle::after{
-    width:60px;
-    height:60px;
+    width:70px;
+    height:70px;
     background-color:rgb(196, 245, 196);
 }
 
