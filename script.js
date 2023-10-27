@@ -1,10 +1,15 @@
 let cicrle_class="circle"
 let x_class="x"
 let circleTurn;
+const winningCombos=[
+    [0,1,2], [3,4,5], [6,7,8],
+    [0,3,6], [1,4,7], [2,5,8],
+    [0,4,8], [2,4,6]
+]
 
 const GameBoard = (() =>{
     const gameboard=document.querySelector("#gameboard");
-    const startCells=["", "", "", "", "", "", "", "", ""]
+    const startCells=["", "", "", "", "", "", "", "", ""];
 
     const createBoard = ()=>{
         startCells.forEach((cell, index) =>{
@@ -15,53 +20,47 @@ const GameBoard = (() =>{
         });
     }
 
+    const remove=()=>{
+        gameboard.remove();
+    }
+
     return{
         createBoard,
+        remove,
     }
 
 })();
+
+
 
 function handleClick(e){
     const cell=e.target;
     const currentClass=circleTurn? cicrle_class : x_class;
     placeMark(cell, currentClass)
     swapTurns()
-}
+};
+
 
 function placeMark(cell, currentClass){
-    cell.classList.add(currentClass);
-}
+   cell.classList.add(currentClass);
+};
 
 function swapTurns(){
-    circleTurn = !circleTurn
-}
+    circleTurn = !circleTurn   
+};
 
-
-const Game =(()=>{
-    
-    const start=()=>{
-        const X=document.querySelector("#X-button");
-        X.addEventListener("click", function(){
-        const info=document.querySelector(".info");
-        info.textContent="X plays first"
-        });
-
-        const O=document.querySelector("#O-button");
-        O.addEventListener("click", function(){
-        const info=document.querySelector(".info");
-        info.textContent="O plays first"
-        });
-        
-    };
-
-    return{
-        start,
-    }
-
-})();
+/*function checkWin(currentClass){
+   return winningCombos.some(combinations=>{
+    return combinations.every(index =>{
+        return cellElement[index].classList.contains(currentClass)
+    })
+   })
+}*/
 
 const startGame=document.querySelector("#start-button");
 startGame.addEventListener("click", function(){
+    const info=document.querySelector(".info");
+    info.textContent="X plays first"
     GameBoard.createBoard();
-    Game.start();
-},{once:true});
+});
+
