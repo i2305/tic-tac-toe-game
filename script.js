@@ -1,6 +1,8 @@
 let cicrle_class="circle"
 let x_class="x"
 let circleTurn;
+const info=document.querySelector(".winning-message");
+const message=document.getElementById("game-over")
 const winningCombos=[
     [0,1,2], [3,4,5], [6,7,8],
     [0,3,6], [1,4,7], [2,5,8],
@@ -8,36 +10,53 @@ const winningCombos=[
 ]
 
 const GameBoard = (() =>{
-    const gameboard=document.querySelector("#gameboard");
+    let gameboard=document.querySelector("#gameboard");
     const startCells=["", "", "", "", "", "", "", "", ""];
 
+
     const createBoard = ()=>{
-        startCells.forEach((cell, index) =>{
+        startCells.forEach((_cell, index) =>{
             const cellElement=document.createElement("div");
             cellElement.classList.add("cell");
-            gameboard.appendChild(cellElement)
+            cellElement.id=index;
             cellElement.addEventListener("click", handleClick, {once:true});
+            gameboard.append(cellElement);
         });
-    }
+    };
 
-    const remove=()=>{
-        gameboard.remove();
+    const resetBoard=()=>{
+        const allCells=document.querySelectorAll(".cell")
+        allCells.forEach(cell=>{
+            cell.classList.remove(x_class)
+            cell.classList.remove(cicrle_class)
+            cell.removeEventListener("click", handleClick)
+            cell.addEventListener("click", handleClick, {once:true});
+        })
     }
-
     return{
         createBoard,
-        remove,
+        resetBoard,
     }
 
 })();
 
-
+GameBoard.createBoard();
 
 function handleClick(e){
     const cell=e.target;
     const currentClass=circleTurn? cicrle_class : x_class;
     placeMark(cell, currentClass)
-    swapTurns()
+    if(xWins(x_class)){
+        info.innerText="X wins!"
+        message.classList.add("show")
+    } else if (circleWins(cicrle_class)){
+        info.innerText="O wins!"
+        message.classList.add("show")
+    } else if (isDraw()){
+        info.innerText="It's a draw!"
+        message.classList.add("show")
+    };
+    swapTurns();
 };
 
 
@@ -49,18 +68,36 @@ function swapTurns(){
     circleTurn = !circleTurn   
 };
 
-/*function checkWin(currentClass){
-   return winningCombos.some(combinations=>{
-    return combinations.every(index =>{
-        return cellElement[index].classList.contains(currentClass)
+function circleWins(cicrle_class){
+    const cellElements=document.querySelectorAll(".cell")
+    return winningCombos.some(combination=>{
+        return combination.every(index=>{
+            return cellElements[index].classList.contains(cicrle_class)
+        })
     })
-   })
-}*/
+}
 
-const startGame=document.querySelector("#start-button");
-startGame.addEventListener("click", function(){
-    const info=document.querySelector(".info");
-    info.textContent="X plays first"
-    GameBoard.createBoard();
-});
+function xWins(x_class){
+    const cellElements=document.querySelectorAll(".cell")
+    return winningCombos.some(combination=>{
+        return combination.every(index=>{
+            return cellElements[index].classList.contains(x_class)
+        })
+    })
+}
 
+function isDraw(){
+    const cellElements=document.querySelectorAll(".cell")
+    return [...cellElements].every(cell=>{
+        return cell.classList.contains(x_class) || cell.classList.contains(cicrle_class)
+    })
+}
+
+
+const restartGame=document.querySelector("#reset-button");
+restartGame.addEventListener("click", function(){
+    info.innerText=""
+    message.classList.remove("show")
+    GameBoard.resetBoard();
+
+})
