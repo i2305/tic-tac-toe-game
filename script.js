@@ -1,6 +1,8 @@
 let cicrle_class="circle"
 let x_class="x"
 let circleTurn;
+const playerInfo=document.querySelector(".info")
+playerInfo.textContent="X plays first";
 const info=document.querySelector(".winning-message");
 const message=document.getElementById("game-over")
 const winningCombos=[
@@ -45,6 +47,8 @@ GameBoard.createBoard();
 function handleClick(e){
     const cell=e.target;
     const currentClass=circleTurn? cicrle_class : x_class;
+    const go=currentClass==="circle" ? "X" : "O"
+    playerInfo.textContent="Player " + go + "'s turn";
     placeMark(cell, currentClass)
     if(xWins(x_class)){
         info.innerText="X wins!"
@@ -65,8 +69,9 @@ function placeMark(cell, currentClass){
 };
 
 function swapTurns(){
-    circleTurn = !circleTurn   
-};
+    circleTurn = !circleTurn;
+}
+
 
 function circleWins(cicrle_class){
     const cellElements=document.querySelectorAll(".cell")
